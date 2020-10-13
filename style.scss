@@ -1,0 +1,212 @@
+$text-color: #656565;
+
+
+@mixin flex($align: flex-start, $justify: flex-start, $wrap: nowrap, $flex-direction: row) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-wrap: $wrap;
+    flex-direction: $flex-direction;
+}
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin text($font-size, $font-weight, $color: $text-color) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: $color;
+}
+
+html {
+    font-size: 62.5%; // 1rem = 10px
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; //width includes borders and paddings
+  --webkit-box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block; //inline (default) -> block, can set tag: margin: 0 auto;
+    max-width: 100%; //fits to father of img tag
+}
+  
+body {
+    font-family: "Poppins", sans-serif;
+    color: $text-color;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+// 1000px, 940px
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto; //it is always in the middle of the screen if the screen is bigger than max-width
+}
+  
+.container {
+    max-width: 980px; //max-width = 940 + 20*2
+    margin: 0 auto; //it is always in the middle of the screen if the screen is bigger than max-width
+    padding-left: 2rem; //add extra padding when opening it on mobile screen
+    padding-right: 2rem;
+}
+
+.header {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    &__inner {
+        @include flex(center, space-between);
+    }
+    &__left {
+        @include flex(center);
+    }
+    &__right {
+        @include flex(center, space-between);
+        width: 28rem;
+    }
+    &__image{
+        margin-right: 2rem;
+        @include size(6rem, 6rem);
+        box-shadow: 0 10px 10px -12px $text-color;
+    }
+    &__text-bold {
+        @include text(2rem, 600);
+    }
+    &__text-regular {
+        @include text(2rem, 100);
+    }
+}
+
+.slider {
+    max-width: 80rem;
+    margin: 0 auto; //it is always in the middle of the screen if the screen is bigger than max-width
+    text-align: center;
+    margin-bottom: 6rem;
+    &__title {
+        @include text(2.6rem, 600, black);
+        padding-bottom: 2.5rem;
+    }
+    //820 310
+    &__img {
+        width: 82rem;
+        height: 31rem;
+        object-fit: cover;  //resize to fit its container.
+        padding-bottom: 3rem;
+    }
+    &__text-bold {
+        @include text(2rem, 900, #36557f);
+        display: block;
+    }
+    &__text-regular {
+        @include text(1.4rem, 300, #36557f);
+    }
+}
+
+.button {
+    @include flex(center, center, nowrap, column);
+    outline: none;
+    padding: 1.5rem 3rem;
+    display: inline-block;  //letters number corresponds to the width
+    background-color: #74b4ed;  //some browsers display background-color is grey
+    border: 2px solid currentColor;
+    border-radius: 5rem;
+    box-shadow: 0 70px 20px -35px $text-color;
+}
+
+.feature {
+    margin-bottom: 2.5rem;
+    &__list {
+        @include flex(center, space-between, wrap);
+    }
+    &__item {
+        @include flex(flex-start, flex-start, wrap);
+        @include size(30rem, 16rem);
+    }
+    &__image {
+        object-fit: cover;  //resize to fit its container.
+        margin-bottom: 4rem;
+        @include size(7rem, 7rem);
+    }
+    &__info {
+        padding-left: 1rem;
+        @include size(22rem, 16rem);
+    }
+    &__header {
+        padding-bottom: 1.5rem;
+        @include text(2.5rem, 600, #000000);
+    }
+}
+
+.testimonial {
+    @include flex(flex-start, flex-start, wrap);
+    margin-bottom: 3.5rem;
+    &__introduction {
+        @include text(2.5rem, 400, #74b4ed);
+        font-style: italic;
+        padding-bottom: 1.5rem;
+    }
+    &__statement {
+        @include text(1.5rem, 400, $text-color);
+        font-style: italic;
+        padding: 2.5rem 3.5rem;
+        margin-bottom: 1.5rem;
+        border: 2px solid currentColor;
+        border-radius: 0.5rem;
+        text-align: center;
+        background-color: #eaeaea;
+    }
+    &__author {
+        @include text(1.5rem, 400, $text-color);
+        text-align: end;
+    }
+}
+
+.format-button {
+    max-width: 80rem;
+    margin: 0 auto; //it is always in the middle of the screen if the screen is bigger than max-width
+    text-align: center;
+    margin-bottom: 7rem;
+}
+
+
+.footer {
+    &__container1 {
+      @include flex(flex-start, space-between);
+      background-color: #a0a0a0;
+      padding: 2rem;
+    }
+    &__header {
+        @include text(2rem, 600,  #000000);
+        padding-bottom: 2rem;
+    }
+    &__description {
+        @include text(2rem, 400,  #000000);
+        padding-bottom: 2rem;
+    }
+    &__item {
+      width: 23%
+    }
+    &__image {
+        object-fit: cover;  //resize to fit its container.
+    }
+    &__container2 {
+        @include flex(center, space-between, wrap);
+        background-color: #626262;
+        padding: 1rem;
+        height: 3.5rem;
+        color: #000000;
+    }
+    &__social i {
+        margin-right: 1rem;
+        font-size: 2rem;
+    }
+  }
